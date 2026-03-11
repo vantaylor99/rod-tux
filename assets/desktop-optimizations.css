@@ -67,12 +67,26 @@
   }
 }
 
-/* Desktop-only: shrink only the WebM video in the first hero so there is padding around it.
-   Target the video element only (not images) via video.hero__media. */
+/* First hero only (desktop): start gradient even lower so the WebM video bottom stays visible */
+@media screen and (min-width: 750px) {
+  main .hero-wrapper:first-of-type .hero__media-grid::after {
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 68%,
+      rgba(255, 255, 255, 0.2) 82%,
+      rgba(255, 255, 255, 0.5) 92%,
+      #fff 100%
+    );
+  }
+}
+
+/* Desktop-only: shrink only the WebM video in the first hero (more padding, bottom easier to see).
+   Uses first-of-type so only that video is affected, not the footer hero image or any other media. */
 @media screen and (min-width: 990px) {
-  #shopify-section-hero_p9CmMG video.hero__media {
-    max-width: 80%;
-    max-height: 80%;
+  main .hero-wrapper:first-of-type video.hero__media {
+    max-width: 58%;
+    max-height: 58%;
   }
 }
 

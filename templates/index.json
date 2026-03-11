@@ -2957,6 +2957,7 @@
         "text_2",
         "email_signup"
       ],
+      "disabled": true,
       "name": "Newsletter",
       "settings": {
         "content_direction": "column",
