@@ -1,0 +1,330 @@
+/**
+ * Desktop layout optimizations
+ * Improves readability and use of space on tablets and desktops (750px+).
+ * Mobile-first base styles remain in base.css.
+ */
+
+/* ========== Hero: show full image (no crop) on desktop and mobile ========== */
+.hero-wrapper .hero__media-wrapper {
+  overflow: hidden;
+}
+
+.hero-wrapper .hero__media {
+  object-fit: contain !important;
+  object-position: center center;
+}
+
+.hero-wrapper .hero__media-grid {
+  background: #fff;
+}
+
+/* Remove gradient overlay so hero media shows on solid white background */
+.hero-wrapper .hero__media-grid .overlay {
+  background: transparent !important;
+}
+
+/* Prevent hero from causing horizontal scroll / cutoff */
+.hero-wrapper,
+.hero-wrapper .hero__container {
+  overflow-x: clip;
+}
+
+/* ========== Header: black background with light text ========== */
+#header-component .header__row,
+.header-section .header__row {
+  background-color: #000 !important;
+  --color-background: #000;
+  --color-foreground: #fff;
+  --color-foreground-rgb: 255, 255, 255;
+  --color-border: rgb(255 255 255 / 0.2);
+  --color-border-rgb: 255, 255, 255;
+}
+
+#header-component .header__row a,
+#header-component .header__row button,
+#header-component .header__row .icon,
+.header-section .header__row a,
+.header-section .header__row button,
+.header-section .header__row .icon {
+  color: #fff;
+}
+
+#header-component .header__row a:hover,
+#header-component .header__row button:hover,
+.header-section .header__row a:hover,
+.header-section .header__row button:hover {
+  color: rgb(255 255 255 / 0.85);
+}
+
+/* Make dark logo visible on black header (invert to white) */
+#header-component .header__row .header-logo__image,
+#header-component .header__row .header-logo img,
+.header-section .header__row .header-logo__image,
+.header-section .header__row .header-logo img {
+  filter: brightness(0) invert(1);
+}
+
+/* Header: extra padding below logo on mobile */
+@media screen and (max-width: 749px) {
+  .header__row--top .header__columns {
+    padding-block-end: 1.25rem;
+  }
+}
+
+/* ========== Page margins: more breathing room on large viewports ========== */
+@media screen and (min-width: 990px) {
+  .page-width-wide,
+  .page-width-normal,
+  .page-width-narrow,
+  .page-width-content {
+    --page-margin: 48px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .page-width-wide,
+  .page-width-normal,
+  .page-width-narrow,
+  .page-width-content {
+    --page-margin: 56px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .page-width-wide,
+  .page-width-normal,
+  .page-width-narrow,
+  .page-width-content {
+    --page-margin: 64px;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .page-width-wide,
+  .page-width-normal,
+  .page-width-narrow,
+  .page-width-content {
+    --page-margin: 72px;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .page-width-wide,
+  .page-width-normal,
+  .page-width-narrow,
+  .page-width-content {
+    --page-margin: 80px;
+  }
+}
+
+/* ========== Section spacing: more padding on desktop ========== */
+@media screen and (min-width: 1200px) {
+  .section .spacing-style {
+    --spacing-scale: 1.15;
+  }
+
+  .section .layout-panel-flex {
+    --gap-scale: 1.1;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .section .spacing-style {
+    --spacing-scale: 1.25;
+  }
+
+  .section .layout-panel-flex {
+    --gap-scale: 1.15;
+  }
+}
+
+/* ========== Typography: comfortable reading on desktop ========== */
+@media screen and (min-width: 750px) {
+  /* Constrain line length for body text on larger screens */
+  .custom-typography p,
+  .rte p {
+    max-width: var(--max-width--body-normal, 65ch);
+  }
+}
+
+/* ========== Header: balanced height and spacing on desktop ========== */
+@media screen and (min-width: 750px) {
+  .header__row--top .header__columns {
+    min-height: 4.5rem;
+  }
+
+  .header__column--left,
+  .header__column--center,
+  .header__column--right {
+    gap: var(--gap-2xl, 1.5rem);
+  }
+}
+
+/* ========== Hero: marquee full width, button centered below ========== */
+@media screen and (min-width: 750px) {
+  .hero__content-wrapper.layout-panel-flex--column marquee-component {
+    width: 100vw;
+    max-width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    box-sizing: content-box;
+  }
+
+  .hero__content-wrapper.layout-panel-flex--column > *:last-child {
+    align-self: center;
+  }
+}
+
+/* ========== What Customers Say: 2x3 grid (2 rows, 3 columns) ========== */
+/* Match section by id (exact or containing section_reviews) */
+@media screen and (min-width: 750px) {
+  [id*="section_reviews"] .section-content-wrapper.layout-panel-flex--column,
+  #shopify-section-section_reviews .section-content-wrapper.layout-panel-flex--column {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto repeat(2, 1fr);
+    gap: 1.5rem 1.5rem;
+    align-items: stretch;
+  }
+
+  [id*="section_reviews"] .section-content-wrapper.layout-panel-flex--column > *:first-child,
+  #shopify-section-section_reviews .section-content-wrapper.layout-panel-flex--column > *:first-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+
+  [id*="section_reviews"] .section-content-wrapper.layout-panel-flex--column > .group-block,
+  #shopify-section-section_reviews .section-content-wrapper.layout-panel-flex--column > .group-block {
+    background: var(--color-background);
+    border: 1px solid rgb(var(--color-border-rgb, 0 0 0) / 0.15);
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.06);
+  }
+
+  [id*="section_reviews"] .group-block .text-block p:first-of-type,
+  #shopify-section-section_reviews .group-block .text-block p:first-of-type {
+    margin-block-end: 0.25rem;
+  }
+
+  [id*="section_reviews"] .group-block .text-block p:nth-of-type(2),
+  #shopify-section-section_reviews .group-block .text-block p:nth-of-type(2) {
+    margin-block-end: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+}
+
+/* ========== How it Works: heading full width, 3 columns with images as focus, steps below ========== */
+@media screen and (min-width: 750px) {
+  [id*="section_how"] .section-content-wrapper.layout-panel-flex--row,
+  #shopify-section-section_how .section-content-wrapper.layout-panel-flex--row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem 2.5rem;
+    align-items: start;
+  }
+
+  [id*="section_how"] .section-content-wrapper.layout-panel-flex--row > *:first-child,
+  #shopify-section-section_how .section-content-wrapper.layout-panel-flex--row > *:first-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+
+  [id*="section_how"] .section-content-wrapper .group-block,
+  #shopify-section-section_how .section-content-wrapper .group-block {
+    min-inline-size: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  [id*="section_how"] .group-block .group-block-content,
+  #shopify-section-section_how .group-block .group-block-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  [id*="section_how"] .group-block .resource-image,
+  [id*="section_how"] .group-block .media-wrapper,
+  [id*="section_how"] .group-block [class*='media'],
+  #shopify-section-section_how .group-block .resource-image,
+  #shopify-section-section_how .group-block .media-wrapper,
+  #shopify-section-section_how .group-block [class*='media'] {
+    width: 100%;
+    max-width: 18rem;
+    margin-inline: auto;
+    overflow: visible;
+    border-radius: 0.5rem;
+  }
+
+  [id*="section_how"] .group-block .resource-image img,
+  [id*="section_how"] .group-block .media-wrapper img,
+  [id*="section_how"] .group-block [class*='image'] img,
+  #shopify-section-section_how .group-block .resource-image img,
+  #shopify-section-section_how .group-block .media-wrapper img,
+  #shopify-section-section_how .group-block [class*='image'] img {
+    width: 100%;
+    height: auto;
+    max-height: 18rem;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+  }
+
+  [id*="section_how"] .group-block .custom-typography,
+  [id*="section_how"] .group-block .text-block,
+  [id*="section_how"] .group-block p,
+  #shopify-section-section_how .group-block .custom-typography,
+  #shopify-section-section_how .group-block .text-block,
+  #shopify-section-section_how .group-block p {
+    font-size: 1rem;
+    margin-block-start: 1rem;
+    max-width: 20rem;
+  }
+}
+
+/* ========== Follow The Series: larger icons; Instagram posts row ========== */
+@media screen and (min-width: 750px) {
+  #shopify-section-section_social .group-block a,
+  #shopify-section-section_social .group-block icon-component {
+    --icon-size-md: 2rem;
+  }
+
+  #shopify-section-section_social .group-block svg {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  #shopify-section-section_social .group-block:has(.image-block:nth-of-type(3)) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 36rem;
+    margin-inline: auto;
+  }
+
+  #shopify-section-section_social .group-block:has(.image-block:nth-of-type(3)) .image-block {
+    aspect-ratio: 1;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  #shopify-section-section_social .group-block:has(.image-block:nth-of-type(3)) .image-block a,
+  #shopify-section-section_social .group-block:has(.image-block:nth-of-type(3)) .image-block img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* ========== Centered content: cap width on ultra-wide for readability ========== */
+@media screen and (min-width: 1600px) {
+  .section--page-width {
+    --full-page-grid-central-column-width: min(
+      var(--page-width) - var(--page-margin) * 2,
+      calc(100% - var(--page-margin) * 2),
+      120rem
+    );
+  }
+}

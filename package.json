@@ -1,0 +1,15 @@
+{
+  "name": "rod-tux",
+  "private": true,
+  "description": "Shopify theme development — pull from store or start from scratch",
+  "scripts": {
+    "theme:dev": "shopify theme dev",
+    "theme:pull": "shopify theme pull",
+    "theme:push": "shopify theme push",
+    "theme:list": "shopify theme list",
+    "theme:info": "shopify theme info"
+  },
+  "devDependencies": {
+    "@shopify/cli": "^3.67.0"
+  }
+}

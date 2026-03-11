@@ -1,0 +1,21 @@
+# Local dev and tooling (use * for reliable matching per Shopify CLI)
+node_modules/*
+.git/*
+*.log
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/*
+.vscode/*
+*.swp
+*.swo
+*~
+
+# Optional: uncomment to exclude from push/pull
+# README.md
+# .shopifyignore
