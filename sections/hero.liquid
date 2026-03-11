@@ -218,33 +218,20 @@
       </div>
     {%- endif -%}
 
-    {%- if media_1_mobile == 'video' or section.settings.hero_transparent_video_url != blank -%}
+    {%- comment -%} When hero_transparent_video_url is set, we already output one video in the desktop block (wrapper shows on mobile too); skip duplicate mobile block. {%- endcomment -%}
+    {%- if media_1_mobile == 'video' and section.settings.hero_transparent_video_url == blank -%}
       <div class="{{ media_wrapper_mobile_class }}">
-        {%- if section.settings.hero_transparent_video_url != blank -%}
-          <video
-            class="hero__media"
-            autoplay
-            loop
-            muted
-            playsinline
-            preload="metadata"
-            data-testid="hero-mobile-video-1"
-          >
-            <source src="{{ section.settings.hero_transparent_video_url | escape }}" type="video/webm">
-          </video>
-        {%- else -%}
-          {{
-            section.settings.video_1_mobile
-            | video_tag:
-              poster: nil,
-              autoplay: true,
-              loop: true,
-              controls: false,
-              muted: true,
-              class: 'hero__media',
-              data-testid: 'hero-mobile-video-1'
-          }}
-        {%- endif -%}
+        {{
+          section.settings.video_1_mobile
+          | video_tag:
+            poster: nil,
+            autoplay: true,
+            loop: true,
+            controls: false,
+            muted: true,
+            class: 'hero__media',
+            data-testid: 'hero-mobile-video-1'
+        }}
       </div>
     {%- endif -%}
   {%- endif -%}
