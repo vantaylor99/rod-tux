@@ -18,17 +18,17 @@
           "settings": {
             "content_direction": "column",
             "vertical_on_mobile": true,
-            "horizontal_alignment": "center",
-            "vertical_alignment": "center",
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-end",
             "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "center",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-end",
+            "gap": 18,
+            "width": "custom",
+            "custom_width": 42,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
-            "height": "fill",
+            "height": "fit",
             "custom_height": 100,
             "inherit_color_scheme": true,
             "color_scheme": "",
@@ -56,10 +56,10 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "",
-                "width": "fit-content",
+                "text": "<p>Travel-ready protection</p><h2>One rig. No tangles. No beat-up guides.</h2><p>The Reef case keeps your spinning setup zipped, organized, and ready from truck bed to boat deck.</p>",
+                "width": "100%",
                 "max_width": "normal",
-                "alignment": "center",
+                "alignment": "left",
                 "type_preset": "h2",
                 "font": "var(--font-body--family)",
                 "font_size": "1.125rem",
@@ -90,8 +90,8 @@
             "inherit_color_scheme": true,
             "color_scheme": "",
             "transparent_background": true,
-            "padding-block-start": 45,
-            "padding-block-end": 24,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
             "gap_between_elements": 24
           },
           "blocks": {
@@ -136,7 +136,7 @@
             "width": "fit-content",
             "custom_width": 100,
             "width_mobile": "fit-content",
-            "custom_width_mobile": 43
+            "custom_width_mobile": 100
           },
           "blocks": {}
         }
@@ -148,37 +148,37 @@
       ],
       "name": "t:names.hero",
       "settings": {
-        "media_type_1": "video",
+        "media_type_1": "image",
         "image_1": "shopify://shop_images/upscaled-hero-image.jpg",
-        "hero_transparent_video_url": "https://cdn.shopify.com/videos/c/o/v/16c36692756b4b6b8c84e04aae1264e8.webm",
+        "hero_transparent_video_url": "",
         "media_type_2": "image",
-        "stack_media_on_mobile": true,
-        "custom_mobile_media": true,
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
         "media_type_1_mobile": "image",
         "media_type_2_mobile": "image",
         "link": "",
         "open_in_new_tab": false,
         "content_direction": "column",
         "vertical_on_mobile": true,
-        "horizontal_alignment": "center",
+        "horizontal_alignment": "flex-start",
         "vertical_alignment": "flex-end",
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "space-between",
-        "gap": 0,
+        "vertical_alignment_flex_direction_column": "flex-end",
+        "gap": 16,
         "section_width": "page-width",
         "section_height": "large",
         "section_height_custom": 5,
         "color_scheme": "scheme-2",
         "toggle_overlay": true,
-        "overlay_color": "#03030378",
+        "overlay_color": "#0c1625a8",
         "overlay_style": "gradient",
         "gradient_direction": "to top",
         "blurred_reflection": false,
         "reflection_opacity": 75,
         "background_image": "shopify://shop_images/hero-bacgkround-image.png",
-        "padding-block-start": 18,
-        "padding-block-end": 64
+        "padding-block-start": 24,
+        "padding-block-end": 40
       }
     },
     "featured_product_reef": {
@@ -191,6 +191,7 @@
           "settings": {
             "media_type": "image",
             "image": "shopify://shop_images/productphoto1.jpg",
+            "theme_asset": "rodtux-reef-cutout-feature.png",
             "link": "",
             "video_loop": true,
             "video_autoplay": false,
@@ -236,7 +237,7 @@
               "name": "t:names.price",
               "static": true,
               "settings": {
-                "show_sale_price_first": true,
+                "show_sale_price_first": false,
                 "type_preset": ""
               },
               "blocks": {}
@@ -247,7 +248,7 @@
               "static": true,
               "settings": {
                 "image_ratio": "adapt",
-                "constrain_to_viewport": "contain"
+                "constrain_to_viewport": "cover"
               },
               "blocks": {}
             },
@@ -274,7 +275,7 @@
       "settings": {
         "product": "reef-rod-case",
         "layout": "media-left",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "padding-block-start": 0,
         "padding-block-end": 48
       }
@@ -325,7 +326,7 @@
             "text_DpXTHh": {
               "type": "text",
               "settings": {
-                "text": "<h2>Not your average rod case</h2>",
+                "text": "<h2>Why Rodtux</h2>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -352,8 +353,9 @@
               "name": "t:names.image",
               "settings": {
                 "image": "shopify://shop_images/background-OLD_but_still_good.jpg",
+                "theme_asset": "rodtux-reef-why.png",
                 "link": "",
-                "image_ratio": "adapt",
+                "image_ratio": "landscape",
                 "width": "fill",
                 "custom_width": 100,
                 "width_mobile": "fill",
@@ -429,7 +431,7 @@
             "text_aVFBJk": {
               "type": "text",
               "settings": {
-                "text": "<h4>Perfect Fit Guarentee</h4>",
+                "text": "<h4>Perfect Fit Guarantee</h4>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -951,7 +953,7 @@
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -963,8 +965,8 @@
         "overlay_color": "#00000026",
         "overlay_style": "solid",
         "gradient_direction": "to top",
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding-block-start": 32,
+        "padding-block-end": 20
       }
     },
     "section_wnk": {
@@ -1445,7 +1447,7 @@
         "overlay_color": "#00000026",
         "overlay_style": "solid",
         "gradient_direction": "to top",
-        "padding-block-start": 32,
+        "padding-block-start": 20,
         "padding-block-end": 32
       }
     },
@@ -2209,9 +2211,7 @@
         "review_1",
         "review_2",
         "review_3",
-        "review_4",
-        "review_5",
-        "review_6"
+        "review_4"
       ],
       "name": "Reviews",
       "settings": {
@@ -2226,7 +2226,7 @@
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-3",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -2313,6 +2313,7 @@
               "type": "image",
               "settings": {
                 "image": "shopify://shop_images/Photoroom_20260220_164032.jpg",
+                "theme_asset": "rodtux-reef-step-1.png",
                 "link": "",
                 "image_ratio": "square",
                 "width": "fill",
@@ -2405,6 +2406,7 @@
               "type": "image",
               "settings": {
                 "image": "shopify://shop_images/Photoroom_20260220_163909.jpg",
+                "theme_asset": "rodtux-reef-step-2.png",
                 "link": "",
                 "image_ratio": "square",
                 "width": "fill",
@@ -2497,6 +2499,7 @@
               "type": "image",
               "settings": {
                 "image": "shopify://shop_images/Photoroom_20260220_163849.jpg",
+                "theme_asset": "rodtux-reef-step-3.png",
                 "link": "",
                 "image_ratio": "square",
                 "width": "fill",
@@ -2566,7 +2569,7 @@
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -2840,9 +2843,7 @@
       },
       "block_order": [
         "heading",
-        "group_wTEM8t",
-        "instagram_heading",
-        "group_instagram_posts"
+        "group_wTEM8t"
       ],
       "name": "Social",
       "settings": {
@@ -2993,7 +2994,7 @@
         "text_eFMntb": {
           "type": "text",
           "settings": {
-            "text": "<p>Dedicated to providing outdoor enthusiasts with reliable gear, our store prioritizes quality and customer satisfaction.</p>",
+            "text": "<p>Built for truck beds, boat decks, and every trip to the water. Keep your setup protected, organized, and ready to fish.</p>",
             "width": "100%",
             "max_width": "narrow",
             "alignment": "center",
@@ -3018,10 +3019,10 @@
         "button_TmU98M": {
           "type": "button",
           "settings": {
-            "label": "Shop now →",
-            "link": "shopify://collections/all",
+            "label": "Shop the Reef",
+            "link": "shopify://products/reef-rod-case",
             "open_in_new_tab": false,
-            "style_class": "link",
+            "style_class": "button",
             "width": "fit-content",
             "custom_width": 100,
             "width_mobile": "fit-content",
@@ -3043,9 +3044,9 @@
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "center",
         "vertical_alignment_flex_direction_column": "center",
-        "gap": 72,
+        "gap": 28,
         "section_width": "page-width",
-        "section_height": "medium",
+        "section_height": "",
         "section_height_custom": 50,
         "color_scheme": "scheme-2",
         "background_media": "none",
@@ -3059,8 +3060,8 @@
         "overlay_color": "#00000026",
         "overlay_style": "solid",
         "gradient_direction": "to top",
-        "padding-block-start": 64,
-        "padding-block-end": 64
+        "padding-block-start": 36,
+        "padding-block-end": 36
       }
     },
     "hero_Ha3FDU": {
@@ -3215,7 +3216,8 @@
         "reflection_opacity": 75,
         "padding-block-start": 72,
         "padding-block-end": 64
-      }
+      },
+      "disabled": true
     }
   },
   "order": [

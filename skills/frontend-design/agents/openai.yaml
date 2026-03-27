@@ -1,0 +1,7 @@
+interface:
+  display_name: "Frontend Design"
+  short_description: "Polished Shopify storefront UI work"
+  default_prompt: "Use $frontend-design to improve the visual design, layout, and storefront UX of this Shopify theme."
+
+policy:
+  allow_implicit_invocation: true

@@ -2,6 +2,7 @@
 
 {%- liquid
   assign product_has_swatches = false
+  assign featured_variant = closest.product.selected_or_first_available_variant
   for product_option in closest.product.options_with_values
     assign swatch_count = product_option.values | map: 'swatch' | compact | size
     if swatch_count > 0
@@ -17,7 +18,22 @@
 
     {% content_for 'block', type: '_featured-product-price', id: 'featured-product-price' %}
   </div>
-  {% content_for 'block', type: '_featured-product-gallery', id: 'featured-product-gallery' %}
+  <div class="featured-product-review-summary">
+    <span class="featured-product-review-summary__stars" aria-hidden="true">★★★★★</span>
+    <span class="featured-product-review-summary__text">4.5 average rating from early customers</span>
+  </div>
+  <div class="featured-product-description rte">
+    {{ closest.product.description }}
+  </div>
+  <div class="featured-product-cta-row">
+    <a class="button" href="{{ routes.cart_url }}/{{ featured_variant.id }}:1">Add to cart</a>
+    <a class="button-secondary" href="{{ closest.product.url }}">Buy now</a>
+  </div>
+  <div class="featured-product-mini-proof">
+    <div class="featured-product-mini-proof__heading">What anglers are saying</div>
+    <p>"Exactly what I needed. No more tangled lines in the truck bed or bent guides."</p>
+    <span>Jesse M.</span>
+  </div>
   {% if product_has_swatches %}
     <div class="featured-product-content-bottom">
       {%- content_for 'block', type: 'swatches', id: 'featured-product-swatches' -%}
@@ -33,6 +49,72 @@
     justify-content: space-between;
     align-items: baseline;
     gap: var(--gap-sm);
+  }
+
+  .featured-product-review-summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    color: rgb(17 17 17 / 0.8);
+    font-size: 0.92rem;
+  }
+
+  .featured-product-review-summary__stars {
+    color: #d9a300;
+    letter-spacing: 0.12em;
+    font-size: 0.95rem;
+  }
+
+  .featured-product-description {
+    max-width: 52ch;
+    color: rgb(17 17 17 / 0.86);
+    line-height: 1.7;
+  }
+
+  .featured-product-description p {
+    margin: 0;
+  }
+
+  .featured-product-description ul {
+    margin: 0.75rem 0;
+    padding-left: 1rem;
+  }
+
+  .featured-product-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  .featured-product-mini-proof {
+    padding: 1rem 1.1rem;
+    border: 1px solid rgb(128 108 97 / 0.22);
+    border-radius: 1.1rem;
+    background: rgb(255 255 255 / 0.72);
+  }
+
+  .featured-product-mini-proof__heading {
+    margin-bottom: 0.35rem;
+    color: #315589;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .featured-product-mini-proof p {
+    margin: 0 0 0.35rem;
+    color: rgb(17 17 17 / 0.88);
+    line-height: 1.5;
+  }
+
+  .featured-product-mini-proof span {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 {% endstylesheet %}
 

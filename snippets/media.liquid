@@ -10,6 +10,11 @@
   assign block_settings = block.settings
   assign show_image = false
   assign show_video = false
+  assign has_theme_asset = false
+
+  if block_settings.theme_asset != blank
+    assign has_theme_asset = true
+  endif
 
   if block_settings.media_type == 'image'
     assign show_image = true
@@ -23,6 +28,7 @@
 <div
   class="
     media-block
+    {% if has_theme_asset %} media-block--theme-asset{% endif %}
     spacing-style
     {% if block_settings.inherit_color_scheme == false %} color-{{ block_settings.color_scheme }}{% endif %}
     {% if show_image and block_settings.image_position == 'contain' or show_video and block_settings.video_position == 'contain' %}
@@ -39,7 +45,14 @@
 >
   {%- if show_image -%}
     {% capture image_tag %}
-      {% if block_settings.image != blank %}
+      {% if has_theme_asset %}
+        <img
+          src="{{ block_settings.theme_asset | asset_url }}"
+          alt=""
+          loading="lazy"
+          class="media-block__media media-block__media--theme-asset border-style"
+        >
+      {% elsif block_settings.image != blank %}
         {% render 'image',
           image: block_settings.image,
           class: 'media-block__media border-style',
@@ -97,6 +110,15 @@
       height: 100%;
       position: absolute;
     }
+  }
+
+  .media-block--theme-asset .media-block__media--theme-asset {
+    object-fit: contain;
+    position: relative;
+    inset: auto;
+    height: auto;
+    max-height: min(36rem, 72vh);
+    width: 100%;
   }
 
   deferred-media[class].media-block__media

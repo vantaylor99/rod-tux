@@ -3,6 +3,11 @@
 {% liquid
   assign block_settings = block.settings
   assign ratio = 1
+  assign has_theme_asset = false
+
+  if block_settings.theme_asset != blank
+    assign has_theme_asset = true
+  endif
 
   case block_settings.image_ratio
     when 'landscape'
@@ -10,7 +15,9 @@
     when 'portrait'
       assign ratio = '4 / 5'
     when 'adapt'
-      assign ratio = block_settings.image.aspect_ratio
+      if has_theme_asset == false
+        assign ratio = block_settings.image.aspect_ratio
+      endif
   endcase
 
   if ratio == 0 or ratio == null
@@ -41,7 +48,15 @@
 %}
 
 {% capture image %}
-  {%- if block_settings.image -%}
+  {%- if has_theme_asset -%}
+    <img
+      src="{{ block_settings.theme_asset | asset_url }}"
+      alt=""
+      loading="lazy"
+      class="image-block__image image-block__image--theme-asset border-style"
+      style="{{ image_border_style }}"
+    >
+  {%- elsif block_settings.image -%}
     {{
       block_settings.image
       | image_url: width: 3840
@@ -101,6 +116,12 @@
     object-fit: cover;
     aspect-ratio: var(--ratio);
   }
+
+  .image-block__image--theme-asset {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -112,6 +133,11 @@
       "type": "image_picker",
       "id": "image",
       "label": "t:settings.image"
+    },
+    {
+      "type": "text",
+      "id": "theme_asset",
+      "label": "Theme asset filename"
     },
     {
       "type": "url",

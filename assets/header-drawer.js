@@ -14,9 +14,12 @@ import { onAnimationEnd, removeWillChangeOnAnimationEnd } from '@theme/utilities
 class HeaderDrawer extends Component {
   requiredRefs = ['details', 'menuDrawer'];
 
+  #headerRow = null;
+
   connectedCallback() {
     super.connectedCallback();
 
+    this.#headerRow = this.closest('.header__row--top');
     this.addEventListener('keyup', this.#onKeyUp);
     this.#setupAnimatedElementListeners();
   }
@@ -72,6 +75,10 @@ class HeaderDrawer extends Component {
 
     if (!summary) return;
 
+    if (details === this.refs.details) {
+      this.#setDrawerRowState(true);
+    }
+
     summary.setAttribute('aria-expanded', 'true');
 
     this.preventInitialAccordionAnimations(details);
@@ -113,6 +120,10 @@ class HeaderDrawer extends Component {
 
     if (!summary) return;
 
+    if (details === this.refs.details) {
+      this.#setDrawerRowState(false);
+    }
+
     summary.setAttribute('aria-expanded', 'false');
     details.classList.remove('menu-open');
     this.refs.menuDrawer.classList.remove('menu-drawer--has-submenu-opened');
@@ -146,6 +157,10 @@ class HeaderDrawer extends Component {
     allAnimated.forEach((element) => {
       element.addEventListener('animationend', removeWillChangeOnAnimationEnd);
     });
+  }
+
+  #setDrawerRowState(isOpen) {
+    this.#headerRow?.classList.toggle('header__row--drawer-open', isOpen);
   }
 
   /**
