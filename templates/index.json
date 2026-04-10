@@ -18,10 +18,10 @@
           "settings": {
             "content_direction": "column",
             "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
+            "horizontal_alignment": "center",
             "vertical_alignment": "flex-end",
             "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
+            "horizontal_alignment_flex_direction_column": "center",
             "vertical_alignment_flex_direction_column": "flex-end",
             "gap": 18,
             "width": "custom",
@@ -56,10 +56,10 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Travel-ready protection</p><h2>One rig. No tangles. No beat-up guides.</h2><p>The Reef case keeps your spinning setup zipped, organized, and ready from truck bed to boat deck.</p>",
+                "text": "<h2>All in one rod &amp; Reel Case</h2><p>The reef keeps your fishing gear organized and always ready from truck bed to your favorite fishing spot</p>",
                 "width": "100%",
                 "max_width": "normal",
-                "alignment": "left",
+                "alignment": "center",
                 "type_preset": "h2",
                 "font": "var(--font-body--family)",
                 "font_size": "1.125rem",
@@ -83,48 +83,6 @@
             "text_yQ8bi6"
           ]
         },
-        "marquee_bHbdQa": {
-          "type": "_marquee",
-          "settings": {
-            "movement_direction": "normal",
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "transparent_background": true,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "gap_between_elements": 24
-          },
-          "blocks": {
-            "text_yYa6cA": {
-              "type": "text",
-              "settings": {
-                "text": "",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h1",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_yYa6cA"
-          ]
-        },
         "button_hero_shop": {
           "type": "button",
           "name": "Shop now",
@@ -143,13 +101,12 @@
       },
       "block_order": [
         "group_xTxdDx",
-        "marquee_bHbdQa",
         "button_hero_shop"
       ],
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/upscaled-hero-image.jpg",
+        "image_1": "shopify://shop_images/IMG_4150.heic",
         "hero_transparent_video_url": "",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
@@ -160,14 +117,14 @@
         "open_in_new_tab": false,
         "content_direction": "column",
         "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "flex-end",
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
         "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "flex-end",
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
         "gap": 16,
         "section_width": "page-width",
-        "section_height": "large",
+        "section_height": "medium",
         "section_height_custom": 5,
         "color_scheme": "scheme-2",
         "toggle_overlay": true,
@@ -176,7 +133,9 @@
         "gradient_direction": "to top",
         "blurred_reflection": false,
         "reflection_opacity": 75,
-        "background_image": "shopify://shop_images/hero-bacgkround-image.png",
+        "background_image": "shopify://shop_images/IMG_4542.heic",
+        "background_image_opacity": 0,
+        "title_panel_opacity": 38,
         "padding-block-start": 24,
         "padding-block-end": 40
       }
@@ -239,16 +198,6 @@
               "settings": {
                 "show_sale_price_first": false,
                 "type_preset": ""
-              },
-              "blocks": {}
-            },
-            "featured-product-gallery": {
-              "type": "_featured-product-gallery",
-              "name": "t:names.image",
-              "static": true,
-              "settings": {
-                "image_ratio": "adapt",
-                "constrain_to_viewport": "cover"
               },
               "blocks": {}
             },
@@ -349,26 +298,10 @@
               "blocks": {}
             },
             "image_tAMLaJ": {
-              "type": "image",
-              "name": "t:names.image",
+              "type": "custom-liquid",
+              "name": "t:names.custom_liquid",
               "settings": {
-                "image": "shopify://shop_images/background-OLD_but_still_good.jpg",
-                "theme_asset": "rodtux-reef-why.png",
-                "link": "",
-                "image_ratio": "landscape",
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "custom_liquid": "{% render 'reef-hover-gallery', product_handle: 'reef-rod-case' %}"
               },
               "blocks": {}
             }
@@ -414,8 +347,8 @@
             "placeholder": "",
             "padding-block-start": 0,
             "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-start": 24,
+            "padding-inline-end": 24
           },
           "blocks": {
             "icon_tN34CH": {
@@ -978,7 +911,7 @@
             "text": "<h2>What you need to know</h2>",
             "width": "fit-content",
             "max_width": "narrow",
-            "alignment": "left",
+            "alignment": "center",
             "type_preset": "h2",
             "font": "var(--font-heading--family)",
             "font_size": "",
@@ -1030,7 +963,7 @@
                     "text": "<p>The Reef is our premium fishing rod case designed for hassle-free travel. It protects your rods from damage and makes transport easy.</p>",
                     "width": "100%",
                     "max_width": "normal",
-                    "alignment": "left",
+                    "alignment": "center",
                     "type_preset": "h5",
                     "font": "var(--font-body--family)",
                     "font_size": "",
@@ -1069,8 +1002,8 @@
                     "text": "<p>Durable construction, secure fit, and easy to pack. Built for anglers who travel.</p>",
                     "width": "100%",
                     "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "rte",
+                    "alignment": "center",
+                    "type_preset": "h5",
                     "font": "var(--font-body--family)",
                     "font_size": "",
                     "line_height": "normal",
@@ -1108,8 +1041,8 @@
                     "text": "<p>Anyone who wants to protect their rods on the road—whether you're flying, driving, or storing gear.</p>",
                     "width": "100%",
                     "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "rte",
+                    "alignment": "center",
+                    "type_preset": "h5",
                     "font": "var(--font-body--family)",
                     "font_size": "",
                     "line_height": "normal",
@@ -1148,16 +1081,16 @@
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
+        "horizontal_alignment": "center",
         "vertical_alignment": "center",
         "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
+        "horizontal_alignment_flex_direction_column": "center",
         "vertical_alignment_flex_direction_column": "center",
         "gap": 32,
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -2151,7 +2084,7 @@
             "rating": {
               "type": "text",
               "settings": {
-                "text": "<p>★★★★☆</p>",
+                "text": "<p>★★★★★</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2211,7 +2144,9 @@
         "review_1",
         "review_2",
         "review_3",
-        "review_4"
+        "review_4",
+        "review_5",
+        "review_6"
       ],
       "name": "Reviews",
       "settings": {
@@ -2705,145 +2640,29 @@
             "icon_QckiTx"
           ]
         },
-        "instagram_heading": {
-          "type": "text",
+        "instafeed_app_block_pQwbTT": {
+          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
           "settings": {
-            "text": "<h3>Latest from Instagram</h3>",
-            "width": "100%",
-            "max_width": "normal",
+            "title": "",
+            "title_color": "",
+            "title_size_v2": 0,
             "alignment": "center",
-            "type_preset": "h3",
-            "font": "var(--font-heading--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 24,
-            "padding-block-end": 12,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "group_instagram_posts": {
-          "type": "group",
-          "name": "Latest from Instagram",
-          "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "center",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 16,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "instagram_1": {
-              "type": "image",
-              "settings": {
-                "link": "https://www.instagram.com/rodtuxfishing/",
-                "image_ratio": "square",
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 8,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "instagram_2": {
-              "type": "image",
-              "settings": {
-                "link": "https://www.instagram.com/rodtuxfishing/",
-                "image_ratio": "square",
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 8,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "instagram_3": {
-              "type": "image",
-              "settings": {
-                "link": "https://www.instagram.com/rodtuxfishing/",
-                "image_ratio": "square",
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 8,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "instagram_1",
-            "instagram_2",
-            "instagram_3"
-          ]
+            "instafeed_margin_top": 0,
+            "instafeed_margin_bottom": 0,
+            "instafeed_margin_sides": 0,
+            "show_instagram_link": false,
+            "link_alignment": "left",
+            "link_color": "#000000",
+            "background_color": "",
+            "feed_id": "",
+            "html_area": ""
+          }
         }
       },
       "block_order": [
         "heading",
-        "group_wTEM8t"
+        "group_wTEM8t",
+        "instafeed_app_block_pQwbTT"
       ],
       "name": "Social",
       "settings": {
@@ -3163,7 +2982,7 @@
               "name": "t:names.button",
               "settings": {
                 "label": "Shop now",
-                "link": "shopify://collections/all",
+                "link": "shopify://products/reef-rod-case",
                 "open_in_new_tab": false,
                 "style_class": "button",
                 "width": "fit-content",
@@ -3184,6 +3003,7 @@
       "block_order": [
         "group_wJfcmV"
       ],
+      "disabled": true,
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
@@ -3216,8 +3036,7 @@
         "reflection_opacity": 75,
         "padding-block-start": 72,
         "padding-block-end": 64
-      },
-      "disabled": true
+      }
     }
   },
   "order": [

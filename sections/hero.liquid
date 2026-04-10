@@ -129,9 +129,17 @@
   assign mobile_widths_array = mobile_widths | split: ', '
 
   assign fetch_priority = 'auto'
+  assign show_blur_shadow = false
 
   if section.index == 1
     assign fetch_priority = 'high'
+  endif
+
+  if section.settings.blurred_reflection and has_only_video == false
+    assign show_blur_shadow = true
+  endif
+  if section.settings.blurred_reflection and has_only_video_mobile == false
+    assign show_blur_shadow = true
   endif
 %}
 
@@ -505,7 +513,7 @@
   {% if request.visual_preview_mode %}
     data-shopify-visual-preview
   {% endif %}
-  {% if section.settings.blurred_reflection and has_only_video == false or has_only_video_mobile == false %}
+  {% if show_blur_shadow %}
     data-blur-shadow="true"
   {% endif %}
 >
@@ -552,7 +560,11 @@
       data-testid="hero-media-wrapper"
     >
       {%- if section.settings.background_image != blank -%}
-        <div class="hero__background-layer" aria-hidden="true">
+        <div
+          class="hero__background-layer"
+          aria-hidden="true"
+          style="--hero-background-image-opacity: {{ section.settings.background_image_opacity | divided_by: 100.0 }};"
+        >
           {{
             section.settings.background_image
             | image_url: width: 3840
@@ -582,7 +594,7 @@
         {{section.settings.section_width}}
         {% if request.design_mode %}hero__content-wrapper--design-mode{% endif %}
       "
-      style="{% render 'layout-panel-style', settings: section.settings %}"
+      style="{% render 'layout-panel-style', settings: section.settings %}; --hero-title-panel-opacity: {{ section.settings.title_panel_opacity | divided_by: 100.0 }};"
     >
       {% content_for 'blocks' %}
     </div>
@@ -660,6 +672,7 @@
     object-fit: cover;
     object-position: center;
     display: block;
+    opacity: var(--hero-background-image-opacity, 1);
   }
 
   .hero__media-grid > .overlay {
@@ -751,6 +764,37 @@
     pointer-events: auto;
   }
 
+  @media screen and (min-width: 750px) {
+    .shopify-section[id$='__hero_p9CmMG'] .hero__content-wrapper > marquee-component {
+      display: none;
+    }
+
+    .shopify-section[id$='__hero_p9CmMG'] .hero__content-wrapper {
+      align-items: center;
+    }
+
+    .shopify-section[id$='__hero_p9CmMG'] .hero__content-wrapper > .group-block {
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .shopify-section[id$='__hero_p9CmMG'] .hero__content-wrapper .text-block > * {
+      text-align: center;
+      margin-inline: auto;
+    }
+
+    .shopify-section[id$='__hero_p9CmMG'] .hero__content-wrapper .text-block h2,
+    .shopify-section[id$='__hero_p9CmMG'] .hero__content-wrapper .text-block p:last-child {
+      margin-inline: auto;
+    }
+
+    .shopify-section[id$='__hero_p9CmMG'] .hero__content-wrapper > .button-block,
+    .shopify-section[id$='__hero_p9CmMG'] .hero__content-wrapper > [data-block-type='button'],
+    .shopify-section[id$='__hero_p9CmMG'] .hero__content-wrapper > :last-child {
+      align-self: center;
+    }
+  }
+
   .hero[data-blur-shadow='true'] {
     --blurred-reflection-filter-saturate: saturate(1.5);
     --blurred-reflection-mask-image: linear-gradient(to bottom, #000 0%, #000 60%, transparent 100%);
@@ -819,6 +863,14 @@
       }
     }
   }
+
+  {% if request.page_type == 'index' and section.index == 1 %}
+    @media screen and (min-width: 750px) {
+      #shopify-section-{{ section.id }} .hero__blurred-image--desktop {
+        display: none !important;
+      }
+    }
+  {% endif %}
 {% endstylesheet %}
 
 {% schema %}
@@ -1305,6 +1357,28 @@
       "id": "background_image",
       "label": "Background image (shows behind video)",
       "info": "Choose an image to show behind transparent video. Transparent areas of the video will reveal this image."
+    },
+    {
+      "type": "range",
+      "id": "background_image_opacity",
+      "label": "Background image opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ section.settings.background_image != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "title_panel_opacity",
+      "label": "Title box transparency",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 38,
+      "info": "Lower values make the dark title box more transparent."
     },
     {
       "type": "header",

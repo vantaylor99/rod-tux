@@ -1,0 +1,88 @@
+{% liquid
+  assign product_resource = product
+  if product_resource == blank and product_handle != blank
+    assign product_resource = all_products[product_handle]
+  endif
+
+  assign sorted_media = '' | split: ','
+  if product_resource != blank
+    assign selected_variant_media = product_resource.selected_or_first_available_variant.featured_media
+
+    if selected_variant_media
+      assign sorted_media = sorted_media | concat: product_resource.media | where: 'id', selected_variant_media.id
+
+      for media in product_resource.media
+        if media.id != selected_variant_media.id
+          assign found_media = product_resource.media | where: 'id', media.id
+          assign sorted_media = sorted_media | concat: found_media
+        endif
+      endfor
+    else
+      assign sorted_media = product_resource.media
+    endif
+  endif
+
+  assign slide_count = sorted_media.size
+%}
+
+<div class="reef-featured-carousel{% if slide_count <= 1 %} reef-featured-carousel--single{% endif %}">
+  {% if slide_count > 0 %}
+    {% capture slides %}
+      {% for media in sorted_media %}
+        {% capture slide_children %}
+          <div class="reef-featured-carousel__media-frame">
+            {% render 'product-media',
+              media: media,
+              sizes: '(min-width: 990px) 42vw, (min-width: 750px) 48vw, 92vw',
+              loading: 'lazy',
+              is_main_product_media: forloop.first
+            %}
+          </div>
+        {% endcapture %}
+
+        {% render 'slideshow-slide',
+          index: forloop.index0,
+          children: slide_children,
+          class: 'reef-featured-carousel__slide',
+          style: '--media-preview-ratio: ' | append: media.preview_image.aspect_ratio | append: ';',
+          media_fit: 'contain'
+        %}
+      {% endfor %}
+    {% endcapture %}
+
+    {% if slide_count > 1 %}
+      {% capture controls %}
+        {% render 'slideshow-controls',
+          style: 'dots',
+          item_count: slide_count,
+          pagination_position: 'center',
+          controls_on_media: true
+        %}
+      {% endcapture %}
+
+      {% capture slideshow_arrows %}
+        {% render 'slideshow-arrows', icon_style: 'chevron' %}
+      {% endcapture %}
+    {% endif %}
+
+    {% render 'slideshow',
+      ref: 'reefFeaturedCarousel',
+      class: 'reef-featured-carousel__slideshow',
+      slides: slides,
+      slide_count: slide_count,
+      slideshow_arrows: slideshow_arrows,
+      arrows_position: 'center',
+      controls: controls
+    %}
+  {% else %}
+    <div class="reef-featured-carousel__fallback">
+      <img
+        src="{{ 'rodtux-reef-cutout-feature.png' | asset_url }}"
+        alt="Reef rod case"
+        loading="lazy"
+        width="2400"
+        height="1600"
+      >
+    </div>
+  {% endif %}
+</div>

@@ -1,0 +1,314 @@
+<script
+  src="{{ 'announcement-bar.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+{% liquid
+  assign first_block = section.blocks.first
+  assign announcement_text = 'FREE SHIPPING ON ALL ORDERS'
+  assign announcement_link = ''
+  assign welcome_text = 'Welcome to Our Store!'
+
+  if first_block
+    assign announcement_text = first_block.settings.text | default: announcement_text
+    assign announcement_link = first_block.settings.link
+  endif
+%}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<announcement-bar-component
+  class="announcement-bar spacing-style section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+  style="{% render 'spacing-padding', settings: section.settings %}; --border-bottom-width: {{ section.settings.divider_width }}px;"
+  autoplay="{{ section.settings.speed | default: 10 }}"
+>
+  <div class="announcement-bar__inner">
+    <button
+      class="announcement-bar__control announcement-bar__control--previous button button-unstyled"
+      type="button"
+      on:click="/previous"
+      ref="previous"
+      aria-label="Previous announcement"
+    >
+      <span class="svg-wrapper">
+        {% render 'icon', icon: 'previous' %}
+      </span>
+    </button>
+
+    <div class="announcement-bar__viewport" aria-live="polite">
+      <div
+        class="announcement-bar__slide"
+        ref="slides[]"
+        aria-hidden="false"
+      >
+        {% if announcement_link != blank %}
+          <a class="announcement-bar__message announcement-bar__message--link" href="{{ announcement_link }}">
+            {{ announcement_text }}
+          </a>
+        {% else %}
+          <span class="announcement-bar__message">{{ announcement_text }}</span>
+        {% endif %}
+      </div>
+
+      <div
+        class="announcement-bar__slide"
+        ref="slides[]"
+        aria-hidden="true"
+      >
+        <span class="announcement-bar__message">{{ welcome_text }}</span>
+      </div>
+    </div>
+
+    <button
+      class="announcement-bar__control announcement-bar__control--next button button-unstyled"
+      type="button"
+      on:click="/next"
+      ref="next"
+      aria-label="Next announcement"
+    >
+      <span class="svg-wrapper">
+        {% render 'icon', icon: 'next' %}
+      </span>
+    </button>
+  </div>
+</announcement-bar-component>
+
+{% stylesheet %}
+  #header-group {
+    --announcement-bar-height: 1.75rem;
+  }
+
+  #header-group > .shopify-section:has(.announcement-bar) {
+    position: sticky;
+    top: 0;
+    z-index: calc(var(--layer-sticky) + 1);
+  }
+
+  .announcement-bar {
+    min-height: var(--announcement-bar-height);
+    border-block-end: var(--border-bottom-width) solid var(--color-border);
+    background: #000;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+    z-index: calc(var(--layer-sticky) + 1);
+  }
+
+  .announcement-bar__inner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.3rem;
+    min-height: var(--announcement-bar-height);
+    width: 100%;
+    padding-inline: 0.35rem;
+  }
+
+  .announcement-bar__viewport {
+    position: relative;
+    display: grid;
+    align-items: center;
+    min-height: calc(var(--announcement-bar-height) - 0.2rem);
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .announcement-bar__slide {
+    grid-area: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 220ms ease,
+      visibility 220ms ease;
+  }
+
+  .announcement-bar__slide[aria-hidden='false'] {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .announcement-bar__message {
+    display: inline-block;
+    margin: 0;
+    max-width: 100%;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    text-decoration: none;
+    color: inherit;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .announcement-bar__message--link:hover,
+  .announcement-bar__message--link:focus-visible {
+    text-decoration: underline;
+  }
+
+  .announcement-bar__control {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 1.8rem;
+    block-size: 1.8rem;
+    color: #fff;
+    opacity: 0.82;
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease;
+  }
+
+  .announcement-bar__control:hover,
+  .announcement-bar__control:focus-visible {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  .announcement-bar__control .svg-wrapper {
+    inline-size: 0.8rem;
+    block-size: 0.8rem;
+  }
+
+  .announcement-bar__control svg {
+    inline-size: 100%;
+    block-size: 100%;
+    color: #fff;
+    fill: currentColor;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .announcement-bar__slide {
+      transition: none;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    #header-group {
+      --announcement-bar-height: 2.6rem;
+    }
+
+    .announcement-bar__inner {
+      gap: 0.8rem;
+      padding-inline: 1rem;
+    }
+
+    .announcement-bar__message {
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+    }
+
+    .announcement-bar__control {
+      inline-size: 2.25rem;
+      block-size: 2.25rem;
+    }
+
+    .announcement-bar__control .svg-wrapper {
+      inline-size: 0.95rem;
+      block-size: 0.95rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.announcement_bar",
+  "blocks": [
+    {
+      "type": "_announcement"
+    }
+  ],
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Rotation interval",
+      "min": 3,
+      "max": 15,
+      "default": 10,
+      "unit": "sec"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.section_width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:options.page"
+        },
+        {
+          "value": "full-width",
+          "label": "t:options.full"
+        }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "scheme-4",
+      "label": "t:settings.color_scheme"
+    },
+    {
+      "type": "range",
+      "id": "divider_width",
+      "label": "t:settings.divider_thickness",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.announcement_bar",
+      "blocks": {
+        "announcement_1": {
+          "type": "_announcement"
+        }
+      },
+      "block_order": ["announcement_1"]
+    }
+  ]
+}
+{% endschema %}

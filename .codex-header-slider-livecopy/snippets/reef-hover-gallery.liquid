@@ -1,0 +1,82 @@
+{% liquid
+  assign product_resource = product
+  if product_resource == blank and product_handle != blank
+    assign product_resource = all_products[product_handle]
+  endif
+
+  assign gallery_href = href
+  if gallery_href == blank and product_resource != blank
+    assign gallery_href = product_resource.url
+  endif
+
+  assign gallery_assets = 'rodtux-reef-why.png|hero,rodtux-reef-step-1.png|detail,rodtux-reef-step-2.png|detail,rodtux-reef-step-3.png|detail,rodtux-reef-cutout-feature.png|cutout' | split: ','
+  assign gallery_item_count = gallery_assets.size
+%}
+
+<script
+  src="{{ 'reef-hover-gallery.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+<reef-hover-gallery
+  class="reef-hover-gallery{% if gallery_item_count <= 1 %} reef-hover-gallery--single{% endif %}"
+  {% if gallery_item_count > 1 %}
+    data-gallery-delay="2800"
+    data-gallery-initial-delay="140"
+  {% endif %}
+>
+  <a class="reef-hover-gallery__link" href="{{ gallery_href | default: '#' }}">
+    <div class="reef-hover-gallery__viewport" aria-hidden="true">
+      <div class="reef-hover-gallery__stage">
+        {% for asset_spec in gallery_assets %}
+          {% assign asset_parts = asset_spec | split: '|' %}
+          {% assign asset_name = asset_parts[0] %}
+          {% assign asset_role = asset_parts[1] | default: 'detail' %}
+          <div
+            class="reef-hover-gallery__plane reef-hover-gallery__plane--{{ asset_role }}"
+            data-gallery-image
+          >
+            <img
+              src="{{ asset_name | asset_url }}"
+              class="reef-hover-gallery__image reef-hover-gallery__image--{{ asset_role }}"
+              alt="{{ product_resource.title | default: 'Reef rod case' }}"
+              loading="lazy"
+              width="1600"
+              height="1200"
+            >
+          </div>
+        {% endfor %}
+
+        {% if gallery_item_count == 0 %}
+          {% if product_resource != blank and product_resource.featured_media.preview_image != blank %}
+            <div class="reef-hover-gallery__plane reef-hover-gallery__plane--fallback" data-gallery-image>
+              {{
+                product_resource.featured_media.preview_image
+                | image_url: width: 1600
+                | image_tag:
+                  class: 'reef-hover-gallery__image reef-hover-gallery__image--fallback',
+                  widths: '480, 720, 960, 1280, 1600',
+                  sizes: '(min-width: 990px) 28vw, (min-width: 750px) 42vw, 92vw',
+                  loading: 'lazy',
+                  alt: product_resource.title
+              }}
+            </div>
+          {% else %}
+            <div class="reef-hover-gallery__plane reef-hover-gallery__plane--fallback" data-gallery-image>
+              <img
+                src="{{ 'rodtux-reef-why.png' | asset_url }}"
+                class="reef-hover-gallery__image reef-hover-gallery__image--fallback"
+                alt="Reef rod case"
+                loading="lazy"
+                width="2400"
+                height="1600"
+              >
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+    <span class="visually-hidden">View the Reef rod case</span>
+  </a>
+</reef-hover-gallery>
